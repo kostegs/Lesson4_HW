@@ -10,7 +10,6 @@ public class SpawnerInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        InstallInputHandler();
         InstallFactory();        
         InstallCoroutinePerformer();
         InstallSpawnerConfig();
@@ -18,35 +17,20 @@ public class SpawnerInstaller : MonoInstaller
         InstallSpawner();
     }
 
-    public void InstallInputHandler()
-    {
-        Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle().NonLazy();
-    }
+    public void InstallFactory() 
+        => Container.Bind<EnemyFactory>().AsSingle();    
 
-    public void InstallFactory()
-    {
-        Container.Bind<EnemyFactory>().AsSingle();
-    }
+    public void InstallCoroutinePerformer() 
+        => Container.Bind<ICoroutinePerformer>().FromInstance(_coroutinePerformer).AsSingle();
 
-    public void InstallCoroutinePerformer()
-    {
-        Container.Bind<ICoroutinePerformer>().FromInstance(_coroutinePerformer).AsSingle();
-    }
+    public void InstallSpawnerConfig() 
+        => Container.Bind<EnemySpawnerConfig>().FromInstance(_enemySpawnerConfig).AsSingle();
 
-    public void InstallSpawnerConfig()
-    {
-        Container.Bind<EnemySpawnerConfig>().FromInstance(_enemySpawnerConfig).AsSingle();
-    }
+    public void InstallSpawnPoints() 
+        => Container.Bind<SpawnPoints>().FromInstance(_spawnPoints).AsSingle();
 
-    public void InstallSpawnPoints()
-    {
-        Container.Bind<SpawnPoints>().FromInstance(_spawnPoints).AsSingle();
-    }
-
-    public void InstallSpawner()
-    {
-        Container.Bind<EnemySpawner>().AsSingle().NonLazy();
-    }
+    public void InstallSpawner() 
+        => Container.Bind<EnemySpawner>().AsSingle().NonLazy();
 
     
 }

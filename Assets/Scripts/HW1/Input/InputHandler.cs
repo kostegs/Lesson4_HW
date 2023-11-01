@@ -1,19 +1,18 @@
+using System;
 using UnityEngine;
 using Zenject;
 
 public class InputHandler : ITickable
 {
-    private PauseHandler _pauseHandler;
-
-    public InputHandler(PauseHandler pauseHandler)
-        => _pauseHandler = pauseHandler;
+    public event Action KeyPauseOnPressed;
+    public event Action KeyPauseOffPressed;
 
     public void Tick()
     {
         if (Input.GetKeyDown(KeyCode.F))
-            _pauseHandler.SetPause(true);
+            KeyPauseOnPressed?.Invoke();
 
         if (Input.GetKeyDown(KeyCode.S))
-            _pauseHandler.SetPause(false);
+            KeyPauseOffPressed?.Invoke();
     }
 }
