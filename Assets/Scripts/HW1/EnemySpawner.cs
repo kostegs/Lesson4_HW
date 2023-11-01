@@ -2,41 +2,43 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
-public class EnemySpawner : MonoBehaviour, IPause
+public class EnemySpawner : IPause
 {
-    [SerializeField, Range(0, 10)] private float _spawnCooldown;
-    [SerializeField] private List<Transform> _spawnPoints;
-
-    private List<Enemy> _spawnedEnemies = new List<Enemy>();
+    private float _spawnCooldown;
+    private List<Transform> _spawnPoints;
 
     private EnemyFactory _enemyFactory;
     private PauseHandler _pauseHandler;
 
     private Coroutine _spawn;
+    private ICoroutinePerformer _coroutinePerformer;
 
     private bool _isPaused;
 
-    [Inject]
-    private void Construct(EnemyFactory enemyFactory, PauseHandler pauseHandler)
+    public EnemySpawner(EnemyFactory enemyFactory, PauseHandler pauseHandler, ICoroutinePerformer coroutinePerformer, EnemySpawnerConfig spawnerConfig, SpawnPoints spawnPoints)
     {
         _enemyFactory = enemyFactory;
         _pauseHandler = pauseHandler;
         _pauseHandler.Add(this);
-    }
+        _coroutinePerformer = coroutinePerformer;
+        _spawnCooldown = spawnerConfig.SpawnCooldown;
+        _spawnPoints = spawnPoints.Points;
+        
+        StartWork();
+    }    
 
     public void StartWork()
     {
         StopWork();
 
-        _spawn = StartCoroutine(Spawn());
+        _spawn = _coroutinePerformer.RunCoroutine(Spawn());
     }
 
     public void StopWork()
     {
         if (_spawn != null )
-            StopCoroutine(_spawn);
+            _coroutinePerformer.EndCoroutine(_spawn);
     }
 
     private IEnumerator Spawn()
@@ -55,16 +57,10 @@ public class EnemySpawner : MonoBehaviour, IPause
 
             Enemy enemy = _enemyFactory.Get((EnemyType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(EnemyType)).Length)); // получаем рэндомный тип врага
             enemy.MoveTo(_spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Count)].position);
-            _spawnedEnemies.Add(enemy);
+            _pauseHandler.Add(enemy);
             time = 0;            
         }
     }
 
-    public void SetPause(bool isPaused)
-    {
-        _isPaused = isPaused;
-
-        foreach (Enemy enemy in _spawnedEnemies)
-            enemy.SetPause(isPaused);
-    }
+    public void SetPause(bool isPaused) => _isPaused = isPaused;
 }
