@@ -1,24 +1,23 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DefeatPanel : MonoBehaviour
+namespace Level4.HW2
 {
-    [SerializeField] private Button _restart;
+    public class DefeatPanel : MonoBehaviour
+    {
+        [SerializeField] private Button _restart;
 
-    private GameplayMediator _mediator;
+        public event Action RestartButtonPressed;
 
-    private void OnEnable() => _restart.onClick.AddListener(OnRestartClick);
+        private void OnEnable() => _restart.onClick.AddListener(OnRestartClick);
 
-    private void OnDisable() => _restart.onClick.RemoveListener(OnRestartClick);
+        private void OnDisable() => _restart.onClick.RemoveListener(OnRestartClick);
 
-    public void Initialize(GameplayMediator mediator) => _mediator = mediator;
+        public void Show() => gameObject.SetActive(true);
 
-    public void Show() => gameObject.SetActive(true);
+        public void Hide() => gameObject.SetActive(false);
 
-    public void Hide() => gameObject.SetActive(false);
-
-    private void OnRestartClick() => _mediator.RestartLevel();
-    
-    
-    
+        private void OnRestartClick() => RestartButtonPressed?.Invoke();
+    }
 }

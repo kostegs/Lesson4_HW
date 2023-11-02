@@ -1,25 +1,40 @@
+using Lesson4;
 using System;
 using UnityEngine;
 
-public class Level
+namespace Level4.HW2
 {
-    public event Action Defeat;
-
-    public void Start()
+    public class Level : IDisposable
     {
-        // Логика старта игры
-        Debug.Log("Start level");
+        public event Action Defeat;
+
+        private InputHandler _inputHandler;
+
+        public Level(InputHandler inputHandler)
+        {
+            _inputHandler = inputHandler;
+            _inputHandler.KeyDefeatPressed += OnDefeat;
+            Start();
+        }
+
+        public void Dispose() => _inputHandler.KeyDefeatPressed -= OnDefeat;
+
+        public void Start()
+        {
+            // Логика старта игры
+            Debug.Log("Start level");
+        }
+
+        public void Restart()
+        {
+            // Очистка уровня
+            Start();
+        }
+
+        public void OnDefeat()
+        {
+            // Логика остановки игры
+            Defeat?.Invoke();
+        }
     }
-
-    public void Restart()
-    {
-        // Очистка уровня
-        Start();
-    }
-
-    public void OnDefeat()
-    {
-        // Логика остановки игры
-        Defeat?.Invoke();
-    }    
 }
