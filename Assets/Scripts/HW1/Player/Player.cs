@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class Player : MonoBehaviour, IEnemyTarget
+namespace Lesson4.HW1
 {
-    private int _maxHealth;
-    private int _health;
-
-    public Vector3 Position => transform.position;
-
-    [Inject]
-    public void Construct(PlayerStatsConfig config)
+    public class Player : MonoBehaviour, IEnemyTarget
     {
-        _health = _maxHealth = config.MaxHealth;
-        Debug.Log($"У меня {_health} HP");
-    }
+        private int _maxHealth;
+        private int _health;
 
-    public void TakeDamage(int damage)
-    {
-        // Проверка урона
-        Debug.Log($"Получил {damage} урона");
+        public Vector3 Position => transform.position;
+
+        [Inject]
+        public void Construct(PlayerStatsConfig config)
+        {
+            _health = _maxHealth = config.MaxHealth;
+            Debug.Log($"У меня {_health} HP");
+        }
+
+        public void TakeDamage(int damage)
+        {
+            // Проверка урона
+            Debug.Log($"Получил {damage} урона");
+        }
     }
 }

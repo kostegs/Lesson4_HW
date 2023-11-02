@@ -1,35 +1,38 @@
 using System;
 using System.Collections.Generic;
 
-public class PauseHandler : IPause, IDisposable
+namespace Lesson4.HW1
 {
-    public PauseHandler(InputHandler inputHandler)
+    public class PauseHandler : IPause, IDisposable
     {
-        _inputHandler = inputHandler;
-        _inputHandler.KeyPauseOnPressed += OnPauseEnabled;
-        _inputHandler.KeyPauseOffPressed += OnPauseDisabled;
-    }
+        public PauseHandler(InputHandler inputHandler)
+        {
+            _inputHandler = inputHandler;
+            _inputHandler.KeyPauseOnPressed += OnPauseEnabled;
+            _inputHandler.KeyPauseOffPressed += OnPauseDisabled;
+        }
 
-    private InputHandler _inputHandler;
-    private List<IPause> _handlers = new List<IPause>();
+        private InputHandler _inputHandler;
+        private List<IPause> _handlers = new List<IPause>();
 
-    public void OnPauseEnabled() => SetPause(true);
+        public void OnPauseEnabled() => SetPause(true);
 
-    public void OnPauseDisabled() => SetPause(false);
+        public void OnPauseDisabled() => SetPause(false);
 
-    public void Add(IPause handler) => _handlers.Add(handler);
+        public void Add(IPause handler) => _handlers.Add(handler);
 
-    public void Remove(IPause handler) => _handlers.Remove(handler);
+        public void Remove(IPause handler) => _handlers.Remove(handler);
 
-    public void SetPause(bool isPaused)
-    {
-        foreach (var handler in _handlers)
-            handler.SetPause(isPaused);
-    }
-   
-    public void Dispose()
-    {
-        _inputHandler.KeyPauseOnPressed -= OnPauseEnabled;
-        _inputHandler.KeyPauseOffPressed -= OnPauseDisabled;
+        public void SetPause(bool isPaused)
+        {
+            foreach (var handler in _handlers)
+                handler.SetPause(isPaused);
+        }
+
+        public void Dispose()
+        {
+            _inputHandler.KeyPauseOnPressed -= OnPauseEnabled;
+            _inputHandler.KeyPauseOffPressed -= OnPauseDisabled;
+        }
     }
 }

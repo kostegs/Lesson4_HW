@@ -1,4 +1,7 @@
-public interface IPause
+namespace Lesson4.HW1
 {
-    void SetPause(bool isPaused);
+    public interface IPause
+    {
+        void SetPause(bool isPaused);
+    }
 }

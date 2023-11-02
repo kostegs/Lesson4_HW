@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public interface IEnemyTarget : IDamageable
+namespace Lesson4.HW1
 {
-    Vector3 Position { get; }
+    public interface IEnemyTarget : IDamageable
+    {
+        Vector3 Position { get; }
+    }
 }

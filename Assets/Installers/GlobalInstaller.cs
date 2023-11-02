@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Zenject;
+using Lesson4.HW1;
 
 public class GlobalInstaller : MonoInstaller
 {

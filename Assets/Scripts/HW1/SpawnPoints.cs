@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnPoints : MonoBehaviour
+namespace Lesson4.HW1
 {
-    [SerializeField] private List<Transform> _points;
+    public class SpawnPoints : MonoBehaviour
+    {
+        [SerializeField] private List<Transform> _points;
 
-    public List<Transform> Points => new List<Transform>(_points);
+        public List<Transform> Points => new List<Transform>(_points);
+    }
 }

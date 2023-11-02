@@ -3,64 +3,67 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : IPause
+namespace Lesson4.HW1
 {
-    private float _spawnCooldown;
-    private List<Transform> _spawnPoints;
-
-    private EnemyFactory _enemyFactory;
-    private PauseHandler _pauseHandler;
-
-    private Coroutine _spawn;
-    private ICoroutinePerformer _coroutinePerformer;
-
-    private bool _isPaused;
-
-    public EnemySpawner(EnemyFactory enemyFactory, PauseHandler pauseHandler, ICoroutinePerformer coroutinePerformer, EnemySpawnerConfig spawnerConfig, SpawnPoints spawnPoints)
+    public class EnemySpawner : IPause
     {
-        _enemyFactory = enemyFactory;
-        _pauseHandler = pauseHandler;
-        _pauseHandler.Add(this);
-        _coroutinePerformer = coroutinePerformer;
-        _spawnCooldown = spawnerConfig.SpawnCooldown;
-        _spawnPoints = spawnPoints.Points;
-        
-        StartWork();
-    }    
+        private float _spawnCooldown;
+        private List<Transform> _spawnPoints;
 
-    public void StartWork()
-    {
-        StopWork();
+        private EnemyFactory _enemyFactory;
+        private PauseHandler _pauseHandler;
 
-        _spawn = _coroutinePerformer.RunCoroutine(Spawn());
-    }
+        private Coroutine _spawn;
+        private ICoroutinePerformer _coroutinePerformer;
 
-    public void StopWork()
-    {
-        if (_spawn != null )
-            _coroutinePerformer.EndCoroutine(_spawn);
-    }
+        private bool _isPaused;
 
-    private IEnumerator Spawn()
-    {
-        float time = 0;
-
-        while (true)
+        public EnemySpawner(EnemyFactory enemyFactory, PauseHandler pauseHandler, ICoroutinePerformer coroutinePerformer, EnemySpawnerConfig spawnerConfig, SpawnPoints spawnPoints)
         {
-            while(time < _spawnCooldown)
-            {
-                if (_isPaused == false)
-                    time += Time.deltaTime;
+            _enemyFactory = enemyFactory;
+            _pauseHandler = pauseHandler;
+            _pauseHandler.Add(this);
+            _coroutinePerformer = coroutinePerformer;
+            _spawnCooldown = spawnerConfig.SpawnCooldown;
+            _spawnPoints = spawnPoints.Points;
 
-                yield return null;
-            }
-
-            Enemy enemy = _enemyFactory.Get((EnemyType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(EnemyType)).Length)); // получаем рэндомный тип врага
-            enemy.MoveTo(_spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Count)].position);
-            _pauseHandler.Add(enemy);
-            time = 0;            
+            StartWork();
         }
-    }
 
-    public void SetPause(bool isPaused) => _isPaused = isPaused;
+        public void StartWork()
+        {
+            StopWork();
+
+            _spawn = _coroutinePerformer.RunCoroutine(Spawn());
+        }
+
+        public void StopWork()
+        {
+            if (_spawn != null)
+                _coroutinePerformer.EndCoroutine(_spawn);
+        }
+
+        private IEnumerator Spawn()
+        {
+            float time = 0;
+
+            while (true)
+            {
+                while (time < _spawnCooldown)
+                {
+                    if (_isPaused == false)
+                        time += Time.deltaTime;
+
+                    yield return null;
+                }
+
+                Enemy enemy = _enemyFactory.Get((EnemyType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(EnemyType)).Length)); // получаем рэндомный тип врага
+                enemy.MoveTo(_spawnPoints[UnityEngine.Random.Range(0, _spawnPoints.Count)].position);
+                _pauseHandler.Add(enemy);
+                time = 0;
+            }
+        }
+
+        public void SetPause(bool isPaused) => _isPaused = isPaused;
+    }
 }

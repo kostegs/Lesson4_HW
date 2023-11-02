@@ -1,4 +1,7 @@
-public interface IDamageable
+namespace Lesson4.HW1
 {
-    void TakeDamage(int damage);
+    public interface IDamageable
+    {
+        void TakeDamage(int damage);
+    }
 }

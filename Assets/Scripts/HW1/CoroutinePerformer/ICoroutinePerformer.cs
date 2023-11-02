@@ -1,8 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public interface ICoroutinePerformer
+namespace Lesson4.HW1
 {
-    Coroutine RunCoroutine(IEnumerator coroutine);
-    void EndCoroutine(Coroutine coroutine);
+    public interface ICoroutinePerformer
+    {
+        Coroutine RunCoroutine(IEnumerator coroutine);
+        void EndCoroutine(Coroutine coroutine);
+    }
 }

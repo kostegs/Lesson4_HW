@@ -1,15 +1,18 @@
 using System.Collections;
 using UnityEngine;
 
-public class CoroutinePerformer : MonoBehaviour, ICoroutinePerformer
+namespace Lesson4.HW1
 {
-    public Coroutine RunCoroutine(IEnumerator coroutine)
+    public class CoroutinePerformer : MonoBehaviour, ICoroutinePerformer
     {
-        return StartCoroutine(coroutine);
-    }
+        public Coroutine RunCoroutine(IEnumerator coroutine)
+        {
+            return StartCoroutine(coroutine);
+        }
 
-    public void EndCoroutine(Coroutine coroutine)
-    {
-        StopCoroutine(coroutine);
+        public void EndCoroutine(Coroutine coroutine)
+        {
+            StopCoroutine(coroutine);
+        }
     }
 }

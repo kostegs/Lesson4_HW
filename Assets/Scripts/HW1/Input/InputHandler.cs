@@ -2,17 +2,20 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class InputHandler : ITickable
+namespace Lesson4.HW1
 {
-    public event Action KeyPauseOnPressed;
-    public event Action KeyPauseOffPressed;
-
-    public void Tick()
+    public class InputHandler : ITickable
     {
-        if (Input.GetKeyDown(KeyCode.F))
-            KeyPauseOnPressed?.Invoke();
+        public event Action KeyPauseOnPressed;
+        public event Action KeyPauseOffPressed;
 
-        if (Input.GetKeyDown(KeyCode.S))
-            KeyPauseOffPressed?.Invoke();
+        public void Tick()
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+                KeyPauseOnPressed?.Invoke();
+
+            if (Input.GetKeyDown(KeyCode.S))
+                KeyPauseOffPressed?.Invoke();
+        }
     }
 }

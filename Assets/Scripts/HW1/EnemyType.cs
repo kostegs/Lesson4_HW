@@ -1,6 +1,9 @@
-public enum EnemyType
+namespace Lesson4.HW1
 {
-    Small,
-    Medium,
-    Large
+    public enum EnemyType
+    {
+        Small,
+        Medium,
+        Large
+    }
 }

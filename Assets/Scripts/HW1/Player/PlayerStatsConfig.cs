@@ -1,9 +1,12 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerStatsConfig", menuName = "Player/PlayerStatsConfig")]
-public class PlayerStatsConfig : ScriptableObject
+namespace Lesson4.HW1
 {
-    [SerializeField, Range(0, 50)] private int _maxHealth;
+    [CreateAssetMenu(fileName = "PlayerStatsConfig", menuName = "Player/PlayerStatsConfig")]
+    public class PlayerStatsConfig : ScriptableObject
+    {
+        [SerializeField, Range(0, 50)] private int _maxHealth;
 
-    public int MaxHealth => _maxHealth;
+        public int MaxHealth => _maxHealth;
+    }
 }
