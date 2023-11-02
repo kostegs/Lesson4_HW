@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Task4
+namespace Lesson4.HW3
 {
     public class BallStorage
     {

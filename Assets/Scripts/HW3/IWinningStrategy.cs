@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Task4
+namespace Lesson4.HW3
 {
     public interface IWinningStrategy
     {

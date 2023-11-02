@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Task4
+namespace Lesson4.HW3
 {
     public class BootStrapper : MonoBehaviour
     {
