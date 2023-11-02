@@ -1,15 +1,15 @@
-using System;
-using UnityEngine;
 using Zenject;
-using Lesson4.HW1;
 
-public class GlobalInstaller : MonoInstaller
+namespace Lesson4
 {
-    public override void InstallBindings()
+    public class GlobalInstaller : MonoInstaller
     {
-        BindInputHandler();
-    }  
-    
-    public void BindInputHandler()
-        => Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle().NonLazy();
+        public override void InstallBindings()
+        {
+            BindInputHandler();
+        }
+
+        public void BindInputHandler()
+            => Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle().NonLazy();
+    }
 }

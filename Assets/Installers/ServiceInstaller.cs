@@ -1,13 +1,16 @@
 using Zenject;
 using Lesson4.HW1;
 
-public class ServiceInstaller : MonoInstaller
+namespace Lesson4
 {
-    public override void InstallBindings()
+    public class ServiceInstaller : MonoInstaller
     {
-        BindPauseHandler();
-    }
+        public override void InstallBindings()
+        {
+            BindPauseHandler();
+        }
 
-    private void BindPauseHandler()
-        => Container.BindInterfacesAndSelfTo<PauseHandler>().AsSingle();    
+        private void BindPauseHandler()
+            => Container.BindInterfacesAndSelfTo<PauseHandler>().AsSingle();
+    }
 }
