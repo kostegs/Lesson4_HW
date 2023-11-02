@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Lesson4.HW3
 {
-    public class Sphere : MonoBehaviour
+    public class Ball : MonoBehaviour
     {
-        [field: SerializeField] public SphereColors Color { get; private set; }
+        [field: SerializeField] public BallColors Color { get; private set; }
 
         private BallStorage _ballStorage;
 

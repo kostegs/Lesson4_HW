@@ -9,6 +9,7 @@ namespace Lesson4
         public event Action KeyPauseOnPressed;
         public event Action KeyPauseOffPressed;
         public event Action KeyDefeatPressed;
+        public event Action<Vector3> MouseLeftButtonPressed;
 
         public void Tick()
         {
@@ -20,6 +21,10 @@ namespace Lesson4
 
             if (Input.GetKeyDown(KeyCode.Space))
                 KeyDefeatPressed?.Invoke();
+
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+                MouseLeftButtonPressed?.Invoke(Input.mousePosition);
+
         }
     }
 }

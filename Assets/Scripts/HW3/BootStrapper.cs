@@ -6,7 +6,7 @@ namespace Lesson4.HW3
     public class BootStrapper : MonoBehaviour
     {
         [SerializeField] private Player _player;
-        [SerializeField] private List<Sphere> _ballsList;
+        [SerializeField] private List<Ball> _ballsList;        
 
         [Header("UI")]
         [SerializeField] private UICountOfColors _uiCountOfColors;        

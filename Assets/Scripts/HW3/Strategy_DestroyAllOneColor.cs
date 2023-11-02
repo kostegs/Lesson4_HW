@@ -7,7 +7,7 @@ namespace Lesson4.HW3
     {
         public bool CheckWinning(IEnumerable countOfColors)
         {
-            foreach (var color in countOfColors as Dictionary<SphereColors, int>)
+            foreach (var color in countOfColors as Dictionary<BallColors, int>)
                 if (color.Value == 0)
                     return true;
 

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 770153444065746580}
   - component: {fileID: 1782955419926553500}
   m_Layer: 0
-  m_Name: BlueSphere
+  m_Name: BlueBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

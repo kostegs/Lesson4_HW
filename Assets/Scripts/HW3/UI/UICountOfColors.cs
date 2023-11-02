@@ -10,7 +10,7 @@ namespace Lesson4.HW3
 
         public void OnCountChanged(object sender, SphereEventArgs eventArgs)
         {
-            var countOfColors = eventArgs.CountOfColors as Dictionary<SphereColors, int>;
+            var countOfColors = eventArgs.CountOfColors as Dictionary<BallColors, int>;
             string text = "Количество шаров по цветам: ";
             
             foreach (var KeyValue in countOfColors)

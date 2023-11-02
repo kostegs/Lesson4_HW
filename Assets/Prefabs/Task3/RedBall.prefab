@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7564492560985951155}
   - component: {fileID: 5197173395426069443}
   m_Layer: 0
-  m_Name: RedSphere
+  m_Name: RedBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

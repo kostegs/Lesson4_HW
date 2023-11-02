@@ -1,5 +1,7 @@
+using ModestTree;
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Lesson4.HW3
 {
@@ -13,17 +15,22 @@ namespace Lesson4.HW3
         private Vector3 _target;
         private bool _isMoving;
         private IWinningStrategy _winningStrategy;
+        private TargetSearcher _targetSearcher;
+
+        [Inject]
+        private void Construct(TargetSearcher targetSearcher)
+        {
+            _targetSearcher = targetSearcher;
+        }
+
+        private void OnEnable() => _targetSearcher.TargetDefined += OnTargetDefined;
+
+        private void OnDisable() => _targetSearcher.TargetDefined -= OnTargetDefined;
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                Ray ray = _currentCamera.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit raycastHit))
-                    _target = new Vector3(raycastHit.point.x, transform.position.y, raycastHit.point.z);
-
-                _isMoving = true;
-            }
+            if (_target == null)
+                return;
 
             if (_isMoving && (transform.position - _target).sqrMagnitude <= 0.1)            
                 _isMoving = false;
@@ -62,6 +69,12 @@ namespace Lesson4.HW3
                     gameObject.SetActive(false);                    
                 }
             }
+        }
+
+        public void OnTargetDefined(Vector3 target)
+        {
+            _target = new Vector3(target.x, transform.position.y, target.z);
+            _isMoving = true;
         }
 
 #if UNITY_EDITOR

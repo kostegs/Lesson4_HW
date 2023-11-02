@@ -9,20 +9,20 @@ namespace Lesson4.HW3
         public IEnumerable CountOfColors => _countOfColors;
         public event EventHandler<SphereEventArgs> CountOfColorsChanged;
 
-        private Dictionary<SphereColors, int> _countOfColors;
+        private Dictionary<BallColors, int> _countOfColors;
 
         public void Initialize(IEnumerable ballList)
         {
-            _countOfColors = new Dictionary<SphereColors, int>();
+            _countOfColors = new Dictionary<BallColors, int>();
 
-            foreach (Sphere ball in ballList)
+            foreach (Ball ball in ballList)
             {
                 AddColorCount(ball.Color, 1);
                 ball.SetBallStorage(this);
             }                
         }
 
-        public void AddColorCount(SphereColors color, int count)
+        public void AddColorCount(BallColors color, int count)
         {
             if (_countOfColors.ContainsKey(color))
                 _countOfColors[color] += count;
@@ -32,10 +32,10 @@ namespace Lesson4.HW3
             CountOfColorsChanged?.Invoke(this, new SphereEventArgs(_countOfColors));
         }
 
-        public void SubtractColorCount(SphereColors color, int count)
+        public void SubtractColorCount(BallColors color, int count)
         {
             if (_countOfColors == null)
-                _countOfColors = new Dictionary<SphereColors, int>();
+                _countOfColors = new Dictionary<BallColors, int>();
 
             if (_countOfColors.ContainsKey(color))
                 _countOfColors[color] -= count;
