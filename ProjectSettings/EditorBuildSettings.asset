@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/HW3/Hw3ChooseStrategy.unity
+    guid: 6029213293f3fb4498d29aca8e30760a
+  - enabled: 1
+    path: Assets/Scenes/HW3/Hw3GamePlay.unity
+    guid: 86a5def737fd00d40839d19b26e9ee09
+  - enabled: 1
+    path: Assets/Scenes/HW3/Hw3Win.unity
+    guid: f0708c45a8370624fb081fe30170863c
   m_configObjects: {}
