@@ -9,9 +9,7 @@ namespace Lesson4.HW3
         private readonly ZenjectSceneLoader _zenjectSceneLoader;
 
         public ZenjectSceneLoaderWrapper(ZenjectSceneLoader zenjectSceneLoader)
-        {
-            _zenjectSceneLoader = zenjectSceneLoader;
-        }
+            => _zenjectSceneLoader = zenjectSceneLoader;        
 
         public void Load(Action<DiContainer> action, int sceneID)
             => _zenjectSceneLoader.LoadScene(sceneID, LoadSceneMode.Single, action);

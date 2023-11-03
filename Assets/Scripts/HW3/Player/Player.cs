@@ -4,13 +4,11 @@ using Zenject;
 namespace Lesson4.HW3
 {
     public class Player : MonoBehaviour
-    {
-        
+    {        
         private Vector3 _target;
         private bool _isMoving;
         private float _speed;
 
-        private IWinningStrategy _winningStrategy;
         private TargetSearcher _targetSearcher;
         private PlayerConfig _playerConfig;
 

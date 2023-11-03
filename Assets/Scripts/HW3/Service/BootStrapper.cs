@@ -12,8 +12,6 @@ namespace Lesson4.HW3
             => _ballsSpawner = ballsSpawner;
 
         private void Awake()
-        {
-            _ballsSpawner.SpawnBalls();
-        }
+            => _ballsSpawner.SpawnBalls();
     }
 }

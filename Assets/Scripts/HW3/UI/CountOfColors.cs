@@ -25,9 +25,7 @@ namespace Lesson4.HW3
             => _ballStorageMediator.BallPoped -= OnBallPoped; 
 
         public void OnBallPoped(Ball ball) => ShowTextCountOfBalls();
-
-        private void OnBallAddedToStorage() => ShowTextCountOfBalls();
-        
+                
         private void ShowTextCountOfBalls()
         {
             string text = "Количество шаров по цветам: ";

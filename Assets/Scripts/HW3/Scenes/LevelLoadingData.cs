@@ -5,10 +5,8 @@ namespace Lesson4.HW3
         private WinningStrategy _winningStrategy;
 
         public LevelLoadingData(WinningStrategy winningStrategy)
-        {
-            _winningStrategy = winningStrategy;
-        }
-
+            => _winningStrategy = winningStrategy;
+        
         public WinningStrategy WinningStrategy { get => _winningStrategy; }
     }
 }

@@ -13,11 +13,8 @@ namespace Lesson4.HW3
 
         [Inject]
         private void Construct(ISceneLoadMediator sceneLoadMediator)
-        {
-            _sceneLoadMediator = sceneLoadMediator;
-        }
-            
-
+            => _sceneLoadMediator = sceneLoadMediator;
+        
         private void OnEnable()
         {
             _popAllBalls.onClick.AddListener(OnPopAllBallsStrategyChoosen);
@@ -34,7 +31,6 @@ namespace Lesson4.HW3
             => _sceneLoadMediator.GoToGamePlay(new LevelLoadingData(WinningStrategy.DestroyAllColors));        
 
         private void OnPopOneColorBallsStrategyChoosen()
-            => _sceneLoadMediator.GoToGamePlay(new LevelLoadingData(WinningStrategy.DestroyAllElementsOfOneColor));
-        
+            => _sceneLoadMediator.GoToGamePlay(new LevelLoadingData(WinningStrategy.DestroyAllElementsOfOneColor));        
     }
 }
